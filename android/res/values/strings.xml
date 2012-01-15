@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Varamozhi Transliteration</string>
+    <string name="font_name">fonts/AnjaliOldLipi.ttf</string>
+    
+    <string-array name="rendering_options">
+	    <item>Default Fix</item>
+	    <item>Alternate Fix (LG Models)</item>
+	    <item>No Fix</item>
+	</string-array>
+	
+	<string-array name="rendering_options_values">
+	    <item>0</item>
+	    <item>1</item>
+	    <item>2</item>
+	</string-array>
+	
+	<string name="help">   <a href="https://sites.google.com/site/cibu/mozhi">Help</a>  </string>
+</resources>
