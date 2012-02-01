@@ -18,7 +18,7 @@
 char *FONTAPI(const char *txt, long flags); 
 
 jstring
-Java_com_jeesmon_apps_varamozhi_MainActivity_stringFromJNI( JNIEnv* env,
+Java_com_jeesmon_apps_varamozhi_Varamozhi_stringFromJNI( JNIEnv* env,
                                                   jobject thiz,
                                                   jstring jinput )
 {
