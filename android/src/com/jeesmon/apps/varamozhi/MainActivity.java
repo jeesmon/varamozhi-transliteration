@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.main);
         
         Resources res = getResources();
-		Typeface tf = Typeface.createFromAsset(getAssets(),
+		Typeface tf = Typefaces.get(this,
 				res.getString(R.string.font_name));
 		
 		final EditText manglish = (EditText) findViewById(R.id.manglish);
@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity {
 		final Button clear = (Button) findViewById(R.id.clear);
 		
 		malayalam.setTypeface(tf);
+		manglish.setTypeface(tf);
 		
 		manglish.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -63,7 +64,7 @@ public class MainActivity extends BaseActivity {
 		    
 		    @Override
 		    public void onTextChanged(CharSequence s, int start, int before, int count) {
-				String text = ComplexCharacterMapper.fix(stringFromJNI(manglish.getText().toString()), unicodeFix);
+				String text = ComplexCharacterMapper.fix(Varamozhi.stringFromJNI(manglish.getText().toString()), unicodeFix);
 				malayalam.setText(text);
 				if(text.length() > 0) {
 					share.setEnabled(true);
@@ -83,7 +84,7 @@ public class MainActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 				sharingIntent.setType("text/plain");
-				sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, stringFromJNI(manglish.getText().toString()));
+				sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Varamozhi.stringFromJNI(manglish.getText().toString()));
 				sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Shared from Varamozhi Transliteration");
 				startActivity(Intent.createChooser(sharingIntent, "Share using"));
 			}
@@ -118,12 +119,6 @@ public class MainActivity extends BaseActivity {
 		});
     }
     
-    public native String stringFromJNI(String input);
-    
-    static {
-        System.loadLibrary("varamozhi-jni");
-    }
-
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -136,6 +131,6 @@ public class MainActivity extends BaseActivity {
 
 	private void copyText(final EditText manglish) {
 		ClipboardManager ClipMan = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-		ClipMan.setText(stringFromJNI(manglish.getText().toString()));
+		ClipMan.setText(Varamozhi.stringFromJNI(manglish.getText().toString()));
 	}
 }
